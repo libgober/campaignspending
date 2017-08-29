@@ -1,0 +1,1 @@
+Total\s+Spots\s+(?P<CONTRACTSPOTCOUNT>\d+)

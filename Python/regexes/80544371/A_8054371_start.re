@@ -1,0 +1,10 @@
+#"BEGINDAYNUMBER","BEGINMONTHNUMBER","BEGINYEAR",
+#"ENDDAYNUMBER","ENDMONTHNUMBER","ENDYEAR",
+Start\s+Date\s+:\s+
+(?P<CONTRACTSTART>(?:1[0-2]|0[1-9])
+#spacing
+.
+(?:[0-2]\d|3[01])
+.
+(?:(?:19|20)?\d{2})
+)
