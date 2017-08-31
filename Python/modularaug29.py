@@ -24,6 +24,7 @@ import numpy as np
 import os
 import datetime
 import copy
+import logging
 import glob
 import string
 import codecs
@@ -946,6 +947,7 @@ class TemplateTester():
             #iterate over each template
             #eventually we will want to stop parsing once we reach success
             for template in constants["templates"]:
+                logging.info("trying " + str(template))
                 new_document = DocumentModel(template,text)
                 if new_document.isempty:
                     pass
