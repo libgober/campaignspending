@@ -60,18 +60,20 @@ constants["dateformats"] = [
                    ]  
 #note this reflects the order these will be tried, which has efficiency implications
 ###these numbers reflect the file that was used to design the template
+#these were selected to correspond to the most efficient ordering
 constants["templates"] = [
-        100495244,
-        7386192,
         105381770,
         109776428,
         49618345,
-        136365447,
+        100495244,
+        7386192,
         80544371,
         130755649,
-        50061208,
         124318564,
-        42361724]
+        50061208,
+        42361724,
+        136365447]
+
 
 def dollarparser(foo):
     return float(foo.replace("$","").replace(",",""))
@@ -960,9 +962,12 @@ if __name__ == "__main__":
 if __name__=="__main__":
     try:
         import os
-        os.chdir(os.path.expanduser("~/Github/campaignspending/Python"))
+        try:
+            os.chdir(os.path.expanduser("~/Github/campaignspending/Python"))
+        except OSError:
+            os.chdir('/Users/brianlibgober/Dropbox/Collaborations/Campaign Spending/Python')
         from modularaug29 import *
-        pullid=1418128
+        pullid=55178
         from sqlalchemy import create_engine
         from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey
         from sqlalchemy.sql import select, text, func
