@@ -27,6 +27,18 @@ import copy
 import logging
 import glob
 import string
+import signal
+
+class TimeoutException(Exception):   # Custom exception class
+    pass
+
+def timeout_handler(signum, frame):   # Custom signal handler
+    raise TimeoutException
+    
+signal.signal(signal.SIGALRM, timeout_handler)
+ALARMDURATION= 120
+
+
 import codecs
 import arrow as a
 
@@ -944,16 +956,21 @@ class TemplateTester():
             self.dollarsindocument = "Yes"
             self.document = "No succesful document model"
             self.successcount = 0
+
             #iterate over each template
             #eventually we will want to stop parsing once we reach success
             for template in constants["templates"]:
                 logging.info("trying " + str(template))
-                new_document = DocumentModel(template,text)
-                if new_document.isempty:
-                    pass
-                else:
-                    self.successcount += 1
-                    self.document = new_document
+                signal.alarm(ALARMDURATION)    
+                try:
+                    new_document = DocumentModel(template,text)
+                    if new_document.isempty:
+                        pass
+                    else:
+                        self.successcount += 1
+                        self.document = new_document
+                except TimeoutException:
+                    logging.info("timeout")
         else:
             self.document = "No dollars in document"
                 
