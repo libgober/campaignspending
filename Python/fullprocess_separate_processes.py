@@ -67,13 +67,17 @@ class InteractionManager(object):
         We'll use modular arithmetic on the indexes.
         """
         try:
-            self.manager_number = int(sys.argv[0]) 
+            self.manager_number = int(sys.argv[1]) 
         except ValueError:
             self.manager_number = 0
         try:
-            self.manager_count = int(sys.argv[1])
+            self.manager_count = int(sys.argv[2])
         except (IndexError,ValueError) as e:
             self.manager_count=1
+            
+        print "Manager number", self.manager_number, "of", self.manager_count,\
+           "assigned"
+        
     
     def setup_killfile(self):
         try:
